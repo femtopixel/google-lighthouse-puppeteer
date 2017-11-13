@@ -1,0 +1,24 @@
+{
+  "name": "google-lighthouse-puppeteer",
+  "version": "0.1.0",
+  "description": "Google Lighthouse Puppeteer is a package to generate reports on multiple urls that allows or not authentication",
+  "main": "lighthouse-puppeteer.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/femtopixel/docker-google-lighthouse-puppeteer.git"
+  },
+  "keywords": [
+    "google",
+    "lighthouse",
+    "puppeteer"
+  ],
+  "author": "Jay MOULIN <jaymoulin@gmail.com> (https://jaymoulin.github.io)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/femtopixel/docker-google-lighthouse-puppeteer/issues"
+  },
+  "homepage": "https://github.com/femtopixel/docker-google-lighthouse-puppeteer#readme"
+}

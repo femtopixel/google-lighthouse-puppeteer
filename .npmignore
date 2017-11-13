@@ -1,0 +1,7 @@
+.idea
+*.iml
+CONTRIBUTING.md
+LICENSE.md
+Dockerfile
+entrypoint.sh
+npm-debug.log
