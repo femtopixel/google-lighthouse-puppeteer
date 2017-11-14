@@ -52,9 +52,7 @@ NodeJS / NPM Package
 ### Installation
 
 ```
-npm install google-lighthouse-puppeteer
-or
-yarn add google-lighthouse-puppeteer
+npm install -g google-lighthouse-puppeteer --unsafe-perm=true --allow-root
 ```
 
 ### Usage
