@@ -1,22 +1,24 @@
-const DEBUG_PORT = 9222;
-const puppeteer = require('puppeteer');
-const lightHouse = require('lighthouse-batch');
-const defaultOptions = {
-    debugPort: DEBUG_PORT,
-    lighthouse: {
-        params: '',
-        useGlobal: true,
-        out: '/home/chrome/reports',
-        html: true,
-        verbose: false,
+class LighthousePuppeteer {
+    constructor() {
+        this.DEBUG_PORT = 9222;
+        this.puppeteer = require('puppeteer');
+        this.lightHouse = require('lighthouse-batch');
+        this.defaultOptions = {
+            debugPort: this.DEBUG_PORT,
+            lighthouse: {
+                params: '',
+                useGlobal: true,
+                out: '/home/chrome/reports',
+                html: true,
+                verbose: false,
+            }
+        };
+        this.browser = null;
     }
-};
-var browser;
 
-module.exports = {
     exec(modulePath, opts = {}) {
         return new Promise((resolveGlobal, reject) => {
-            const options = Object.assign({}, defaultOptions, opts);
+            const options = Object.assign({}, this.defaultOptions, opts);
             const testcase = typeof (modulePath) === 'object' ? modulePath : require(modulePath);
             if (typeof(testcase.connect) !== 'function') {
                 console.log(`${modulePath}: Module incorrectly formatted. Module should have "connect" method!`);
@@ -26,10 +28,10 @@ module.exports = {
                 console.log(`${modulePath}: Module incorrectly formatted. Module should have "getUrls" method!`);
                 process.exit(-4);
             }
-            puppeteer.launch({args: [`--remote-debugging-port=${options.debugPort}`]})
+            this.puppeteer.launch({args: [`--remote-debugging-port=${options.debugPort}`]})
                 .then(testcase.connect)
                 .then(b => new Promise((resolve) => {
-                    browser = b;
+                    this.browser = b;
                     resolve(b);
                 }))
                 .then(b => new Promise((resolve) => {
@@ -39,17 +41,19 @@ module.exports = {
                         html: options.lighthouse.html,
                         out: options.lighthouse.out,
                         useGlobal: options.lighthouse.useGlobal,
-                        params: `--port ${debugPort} ${options.lighthouse.params}`,
+                        params: `--port ${options.debugPort} ${options.lighthouse.params}`,
                     };
-                    lightHouse(options);
+                    this.lightHouse(options);
                     resolve(b);
                 }))
                 .then(b => b.close())
                 .then(b => resolveGlobal)
                 .catch((err) => {
-                    browser.close();
+                    this.browser.close();
                     reject(err);
                 });
         });
     }
-};
+}
+
+module.exports = new LighthousePuppeteer();
