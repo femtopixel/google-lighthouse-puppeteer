@@ -7,6 +7,7 @@ if (process.argv.length <= 2) {
 
 const fs = require('fs');
 const modulePath = process.argv[2];
+const opts = process.argv[3] || '{}';
 
 if (!fs.existsSync(modulePath)) {
     console.log(`File must exists : ${modulePath}`);
@@ -24,4 +25,4 @@ if (typeof(testcase.getUrls) !== 'function') {
 }
 
 const lighthousePuppeteer = require('google-lighthouse-puppeteer');
-lighthousePuppeteer(testcase, JSON.parse(process.argv[3]) || {});
+lighthousePuppeteer(testcase, JSON.parse(opts));

@@ -15,7 +15,7 @@ var browser;
 
 module.exports = (modulePath, opts={}) => {
     const options = Object.assign({}, defaultOptions, opts);
-    const testcase = require(modulePath);
+    const testcase = typeof (modulePath) === 'object' ? modulePath : require(modulePath);
     if (typeof(testcase.connect) !== 'function') {
 
         console.log(`${modulePath}: Module incorrectly formatted. Module should have "connect" method!`);

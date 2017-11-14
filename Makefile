@@ -10,7 +10,9 @@ minor:
 	docker run --rm -v $$HOME:/root -v `pwd`:/app -ti -w /app node npm version minor
 patch:
 	docker run --rm -v $$HOME:/root -v `pwd`:/app -ti -w /app node npm version patch
-install-npm:
+clean:
+	rm *.tgz
+install-npm: clean
 	npm pack
 publish-npm: install-npm
 	npm login && npm publish
