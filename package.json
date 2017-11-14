@@ -16,8 +16,8 @@
     "puppeteer"
   ],
   "dependencies": {
-    "lighthouse-batch": "~2.1",
-    "puppeteer": "~0.13"
+    "lighthouse-batch": "^2.1.0",
+    "puppeteer": "^0.13.0"
   },
   "author": "Jay MOULIN <jaymoulin@gmail.com> (https://jaymoulin.github.io)",
   "license": "MIT",
