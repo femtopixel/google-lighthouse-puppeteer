@@ -55,7 +55,7 @@ NodeJS / NPM Package
 npm install -g google-lighthouse-puppeteer --unsafe-perm=true
 ```
 
-### Usage
+### CLI Usage
 
 ```
 lighthouse-puppeteer /path/to/your/test/case.js [options]
@@ -64,6 +64,33 @@ lighthouse-puppeteer /path/to/your/test/case.js [options]
 with :
 * `/path/to/you/test/case.js` a JS file matching the spec below
 * `options` optional JSON parameter to configure components
+
+#### options
+
+Default:
+
+```
+{
+    debugPort:9222, //port to communicate with chrome-debug (change only if you know what you are doing)
+    lighthouse: {
+        params:'', //optional parameters to be passed to lighthouse
+        useGlobal:true, //should use running chrome-debug or not (yes to use default, no to launch a new one with lighthouse) (change only if you know what you are doing) 
+        out:'/home/chrome/reports', //path to export reports to
+        html:true, //true to export HTML reports with JSON reports, false for json only
+        verbose:false, //false to hide debug, true to display some more informations
+    }
+}
+```
+
+### Package Usage
+
+```javascript
+const lp = require('google-lighthouse-puppeteer');
+
+lp.exec('/path/to/my/test.js')
+    .then(() => console.log('everything ok'))
+    .catch((err) => console.error(err));
+```
 
 #### options
 
@@ -117,7 +144,7 @@ class whateverYouWant
             await page.type('#login', 'admin');
             await page.type('#password', 'admin');
             await page.$eval('#form input[type=submit]', x => x.click());
-            await page.waitForNavigation({waitUntil: 'networkidle'});
+            await page.waitForNavigation({waitUntil: 'networkidle2'});
             resolve(browser);
         });
     }

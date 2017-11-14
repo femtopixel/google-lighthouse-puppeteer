@@ -25,4 +25,4 @@ if (typeof(testcase.getUrls) !== 'function') {
 }
 
 const lighthousePuppeteer = require('google-lighthouse-puppeteer');
-lighthousePuppeteer(testcase, JSON.parse(opts));
+lighthousePuppeteer.exec(testcase, JSON.parse(opts)).catch((error) => console.error(error));
