@@ -15,6 +15,9 @@
     "lighthouse",
     "puppeteer"
   ],
+  "bin": {
+    "lighthouse-pupetteer": "bin/lighthouse-puppeteer.js"
+  },
   "dependencies": {
     "lighthouse-batch": "^2.1.0",
     "puppeteer": "^0.13.0"
