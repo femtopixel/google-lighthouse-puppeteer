@@ -13,9 +13,7 @@ class LighthousePuppeteer {
                 verbose: false,
             },
             puppeteer: {
-                args: [
-                    `--remote-debugging-port=${options.debugPort}`
-                ]
+                args: []
             }
         };
         this.browser = null;
@@ -23,7 +21,8 @@ class LighthousePuppeteer {
 
     exec(modulePath, opts = {}) {
         return new Promise((resolveGlobal, reject) => {
-            const options = Object.assign({}, this.defaultOptions, opts);
+            let options = Object.assign({}, this.defaultOptions, opts);
+            options.puppeteer.args.push(`--remote-debugging-port=${options.debugPort}`);
             const testcase = typeof (modulePath) === 'object' ? modulePath : require(modulePath);
             if (typeof(testcase.connect) !== 'function') {
                 console.log(`${modulePath}: Module incorrectly formatted. Module should have "connect" method!`);
@@ -54,7 +53,7 @@ class LighthousePuppeteer {
                 .then(b => b.close())
                 .then(b => resolveGlobal)
                 .catch((err) => {
-                    this.browser.close();
+                    this.browser && this.browser.close();
                     reject(err);
                 });
         });

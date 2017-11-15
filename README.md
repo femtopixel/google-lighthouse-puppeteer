@@ -69,15 +69,19 @@ with :
 
 Default:
 
-```
+```json
 {
     debugPort:9222, //port to communicate with chrome-debug (change only if you know what you are doing)
-    lighthouse: {
+    lighthouse: { //parameters sent to lighthouse-batch
         params:'', //optional parameters to be passed to lighthouse
         useGlobal:true, //should use running chrome-debug or not (yes to use default, no to launch a new one with lighthouse) (change only if you know what you are doing) 
         out:'/home/chrome/reports', //path to export reports to
         html:true, //true to export HTML reports with JSON reports, false for json only
         verbose:false, //false to hide debug, true to display some more informations
+    },
+    puppeteer: { //parameters sent to puppeteer
+        args: [
+        ]
     }
 }
 ```
