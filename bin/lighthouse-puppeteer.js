@@ -1,28 +1,87 @@
 #! /usr/bin/env node
-
-if (process.argv.length <= 2) {
-    console.log(`Usage: ${__filename} testcase [options]`);
+const clu = require('command-line-usage');
+const cla = require('command-line-args');
+const optionDefinitions = [
+    {
+        name: 'file',
+        alias: 'f',
+        typeLabel: '[underline]{FILE}',
+        description: 'Path to your testcase [underline]{REQUIRED} (default option)' +
+        '\n([italic]{example}: /home/chrome/testcases/mytestcase.js)',
+        defaultOption: true,
+        group: 'main',
+    },
+    {
+        name: 'port',
+        alias: 'p',
+        typeLabel: '[underline]{PORT}',
+        description: 'Chrome headless debug port ([italic]{default}: 9222)',
+        defaultValue: 9222,
+        type: Number,
+        group: 'main',
+    },
+    {
+        name: 'output_directory',
+        alias: 'd',
+        typeLabel: '[underline]{FOLDER}',
+        description: 'Path to output reports' +
+        '\n([italic]{default}: /home/chrome/reports)',
+        defaultValue: '/home/chrome/reports',
+        group: 'lighthouse'
+    },
+    {
+        name: 'html',
+        alias: 'w',
+        description: 'Renders HTML reports alongside JSON reports',
+        type: Boolean,
+        group: 'lighthouse'
+    },
+    {
+        name: 'lighthouse_params',
+        alias: 'l',
+        description: 'Optional parameters to pass to lighthouse' +
+        '\n([italic]{example}: "--quiet --perf")',
+        group: 'lighthouse'
+    },
+    {
+        name: 'verbose',
+        alias: 'v',
+        description: 'The more you add, the more it show information',
+        type: Boolean,
+        multiple: true,
+        group: 'main',
+    },
+    {
+        name: 'help',
+        alias: 'h',
+        description: 'Print this usage guide.',
+        type: Boolean,
+        group: 'main',
+    }
+];
+const definition = [
+    {
+        header: "Options",
+        optionList: optionDefinitions,
+        group: 'main',
+    },
+    {
+        header: "Lighthouse",
+        optionList: optionDefinitions,
+        group: 'lighthouse',
+    },
+    {
+        header: "Puppeteer",
+        content: 'You can add your options for puppeteer by prefixing them with [bold]{--puppeteer-}' +
+        '\n(https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md#puppeteerlaunchoptions)' +
+        '\n\n[italic]{example}: "--puppeteer-ignoreHTTPSErrors --puppeteer-slowMo"'
+    }
+];
+const usage = clu(definition);
+const options = cla(optionDefinitions, {partial: true});
+if (options.main.help || typeof(options.main.file) === 'undefined' || !options.main.file.length) {
+    console.log(usage);
     process.exit(-1);
 }
-
-const fs = require('fs');
-const modulePath = process.argv[2];
-const opts = process.argv[3] || '{}';
-
-if (!fs.existsSync(modulePath)) {
-    console.log(`File must exists : ${modulePath}`);
-    process.exit(-2);
-}
-const testcase = require(modulePath);
-if (typeof(testcase.connect) !== 'function') {
-
-    console.log(`${modulePath}: Module incorrectly formatted. Module should have "connect" method!`);
-    process.exit(-3);
-}
-if (typeof(testcase.getUrls) !== 'function') {
-    console.log(`${modulePath}: Module incorrectly formatted. Module should have "getUrls" method!`);
-    process.exit(-4);
-}
-
-const lighthousePuppeteer = require('google-lighthouse-puppeteer');
-lighthousePuppeteer.exec(testcase, JSON.parse(opts)).catch((error) => console.error(error));
+const lighthousePuppeteer = require('../lighthouse-puppeteer');
+lighthousePuppeteer.exec(options.main.file, options).catch((error) => console.error(error));

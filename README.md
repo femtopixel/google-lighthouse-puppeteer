@@ -58,58 +58,61 @@ npm install -g google-lighthouse-puppeteer --unsafe-perm=true
 ### CLI Usage
 
 ```
-lighthouse-puppeteer /path/to/your/test/case.js [options]
-```
+$> lighthouse-puppeteer -h
 
-with :
-* `/path/to/you/test/case.js` a JS file matching the spec below
-* `options` optional JSON parameter to configure components
+Options
 
-#### options
+  -f, --file FILE   Path to your testcase REQUIRED (default option)
+                    (example: /home/chrome/testcases/mytestcase.js)
+  -p, --port PORT   Chrome headless debug port (default: 9222)
+  -v, --verbose     The more you add, the more it show information
+  -h, --help        Print this usage guide.
 
-Default:
+Lighthouse
 
-```json
-{
-    debugPort:9222, //port to communicate with chrome-debug (change only if you know what you are doing)
-    lighthouse: { //parameters sent to lighthouse-batch
-        params:'', //optional parameters to be passed to lighthouse
-        useGlobal:true, //should use running chrome-debug or not (yes to use default, no to launch a new one with lighthouse) (change only if you know what you are doing) 
-        out:'/home/chrome/reports', //path to export reports to
-        html:true, //true to export HTML reports with JSON reports, false for json only
-        verbose:false, //false to hide debug, true to display some more informations
-    },
-    puppeteer: { //parameters sent to puppeteer
-        args: [
-        ]
-    }
-}
+  -d, --output_directory FOLDER   Path to output reports
+                                  (default: /home/chrome/reports)
+  -w, --html                      Renders HTML reports alongside JSON reports
+  -l, --lighthouse_params         Optional parameters to pass to lighthouse
+                                  (example: "--quiet --perf")
+
+Puppeteer
+
+  You can add your options for puppeteer by prefixing them with --puppeteer-
+  (https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md#puppeteerlaunchoptions)
+
+  example: "--puppeteer-ignoreHTTPSErrors --puppeteer-slowMo 20"
 ```
 
 ### Package Usage
 
 ```javascript
 const lp = require('google-lighthouse-puppeteer');
-
-lp.exec('/path/to/my/test.js')
+const options = {};
+lp.exec('/path/to/my/test.js', options)
     .then(() => console.log('everything ok'))
     .catch((err) => console.error(err));
 ```
+### Options
 
-#### options
+You can change some options like in CLI :
 
-Default:
-
-```
+```json
 {
-    debugPort:9222, //port to communicate with chrome-debug (change only if you know what you are doing)
-    lighthouse: {
-        params:'', //optional parameters to be passed to lighthouse
-        useGlobal:true, //should use running chrome-debug or not (yes to use default, no to launch a new one with lighthouse) (change only if you know what you are doing) 
-        out:'/home/chrome/reports', //path to export reports to
-        html:true, //true to export HTML reports with JSON reports, false for json only
-        verbose:false, //false to hide debug, true to display some more informations
-    }
+    "main": {
+      "port":9222,
+      "verbose":[true, true] //the more you add true, the more the verbosity
+    },
+    "lighthouse": {
+        "params":"",
+        "output_directory":"/home/chrome/reports",
+        "lighthouse_params":""
+    },
+    "_unknown": [  //for puppeteer
+        "--puppeteer-ignoreHTTPSErrors",
+        "--puppeteer-slowMo",
+        "20"
+    ]
 }
 ```
 
