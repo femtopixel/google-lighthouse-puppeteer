@@ -24,7 +24,7 @@ class LighthousePuppeteer {
             if (opts[name].startsWith('--puppeteer-')) {
                 const param = opts[name].replace('--puppeteer-', '');
                 const nextParam = opts[name - -1];
-                this.options.puppeteer[param] = nextParam.startsWith('--puppeteer-') || (nextParam || true);
+                this.options.puppeteer[param] = nextParam && !nextParam.startsWith('--puppeteer-') ? nextParam : true;
             }
         }
         return this;

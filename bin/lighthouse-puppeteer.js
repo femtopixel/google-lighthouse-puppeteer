@@ -40,6 +40,7 @@ const optionDefinitions = [
         name: 'lighthouse_params',
         alias: 'l',
         description: 'Optional parameters to pass to lighthouse' +
+        '\n(https://github.com/GoogleChrome/lighthouse/tree/master/docs)',
         '\n([italic]{example}: "--quiet --perf")',
         group: 'lighthouse'
     },

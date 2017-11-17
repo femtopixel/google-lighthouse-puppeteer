@@ -1,5 +1,5 @@
 Google Lighthouse Puppeteer - Docker Image
-============================================
+==========================================
 
 [![latest release](https://img.shields.io/github/release/femtopixel/docker-google-lighthouse-puppeteer.svg "latest release")](http://github.com/femtopixel/docker-google-lighthouse-puppeteer/releases)
 [![NPM release](https://img.shields.io/npm/v/google-lighthouse-puppeteer.svg "NPM release")](https://www.npmjs.com/package/google-lighthouse-puppeteer)
@@ -88,8 +88,7 @@ Puppeteer
 
 ```javascript
 const lp = require('google-lighthouse-puppeteer');
-const options = {};
-lp.exec('/path/to/my/test.js', options)
+const options = {};lp.exec('/path/to/my/test.js', options)
     .then(() => console.log('everything ok'))
     .catch((err) => console.error(err));
 ```
@@ -101,20 +100,26 @@ You can change some options like in CLI :
 {
     "main": {
       "port":9222,
-      "verbose":[true, true] //the more you add true, the more the verbosity
+      "verbose":[true, true]
     },
     "lighthouse": {
         "params":"",
         "output_directory":"/home/chrome/reports",
         "lighthouse_params":""
     },
-    "_unknown": [  //for puppeteer
+    "_unknown": [
         "--puppeteer-ignoreHTTPSErrors",
         "--puppeteer-slowMo",
         "20"
     ]
 }
 ```
+
+For puppeteer, all params must be added in the `_unknown` entry and are prefixed with `--puppeteer-`. Each value must be in separated entry.
+
+`verbose` is an array of true, the more `true` the more talkative the application.
+
+Lighthouse params can be added respecting [their documentation](https://github.com/GoogleChrome/lighthouse/tree/master/docs)
 
 ### API
 
