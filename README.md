@@ -74,6 +74,7 @@ Lighthouse
                                   (default: /home/chrome/reports)
   -w, --html                      Renders HTML reports alongside JSON reports
   -l, --lighthouse_params         Optional parameters to pass to lighthouse
+                                  (https://github.com/GoogleChrome/lighthouse/#cli-options)
                                   (example: "--quiet --perf")
 
 Puppeteer
@@ -119,7 +120,7 @@ For puppeteer, all params must be added in the `_unknown` entry and are prefixed
 
 `verbose` is an array of true, the more `true` the more talkative the application.
 
-Lighthouse params can be added respecting [their documentation](https://github.com/GoogleChrome/lighthouse/tree/master/docs)
+Lighthouse params can be added respecting [their documentation](https://github.com/GoogleChrome/lighthouse/#cli-options)
 
 ### API
 
