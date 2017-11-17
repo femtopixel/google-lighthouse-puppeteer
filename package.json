@@ -1,6 +1,6 @@
 {
   "name": "google-lighthouse-puppeteer",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "Google Lighthouse Puppeteer is a package to generate reports on multiple urls that allows or not authentication",
   "main": "lighthouse-puppeteer.js",
   "scripts": {
