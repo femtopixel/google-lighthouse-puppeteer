@@ -1,1 +1,3 @@
 google-lighthouse-puppeteer-*.tgz
+.build
+*.yaml

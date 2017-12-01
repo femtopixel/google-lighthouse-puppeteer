@@ -1,6 +1,6 @@
-FROM femtopixel/google-lighthouse
+FROM femtopixel/google-lighthouse:0.3.0
 
-MAINTAINER Jay MOULIN <jaymoulin@gmail.com> <https://twitter.com/moulinjay>
+LABEL maintainer="Jay MOULIN <jaymoulin@gmail.com> <https://twitter.com/moulinjay>"
 
 #https://github.com/GoogleChrome/puppeteer/blob/master/docs/troubleshooting.md
 RUN mkdir -p /home/chrome/testcases && cd /home/chrome && yarn add google-lighthouse-puppeteer
