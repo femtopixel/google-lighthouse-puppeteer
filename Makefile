@@ -1,8 +1,8 @@
-VERSION ?= 0.3.4
+VERSION ?= v2.9.4-v1.2.0-0.3.4
 CACHE ?= --no-cache=1
 FULLVERSION ?= ${VERSION}
 archs = amd64 i386 arm32v7
-.PHONY: install install-npm publishdocker publish-npm docker build-docker publish-docker latest version
+.PHONY: install install-npm publish-npm docker build-docker publish-docker latest version
 all: install publish docker
 	CACHE= make latest
 docker: build-docker publish-docker
@@ -37,7 +37,7 @@ build-docker:
 publish-docker:
 	docker push femtopixel/google-lighthouse-puppeteer
 	cat manifest.yml | sed "s/\$$VERSION/${VERSION}/g" > manifest2.yaml
-	cat manifest2.yaml | sed "s/\$$FULLVERSION/${FULLVERSION}-debian/g" > manifest.yaml
+	cat manifest2.yaml | sed "s/\$$FULLVERSION/${FULLVERSION}/g" > manifest.yaml
 	manifest-tool push from-spec manifest.yaml
 latest: build-docker
 	cat manifest.yml | sed "s/\$$VERSION/${VERSION}/g" > manifest2.yaml
