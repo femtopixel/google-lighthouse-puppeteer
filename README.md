@@ -90,7 +90,8 @@ Puppeteer
 
 ```javascript
 const lp = require('google-lighthouse-puppeteer');
-const options = {};lp.exec('/path/to/my/test.js', options)
+const options = {};
+lp.exec('/path/to/my/test.js', options)
     .then(() => console.log('everything ok'))
     .catch((err) => console.error(err));
 ```
