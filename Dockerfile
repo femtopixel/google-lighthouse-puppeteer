@@ -1,4 +1,4 @@
-FROM femtopixel/google-lighthouse:v3.0.3
+FROM femtopixel/google-lighthouse:v3.1.1
 
 LABEL maintainer="Jay MOULIN <jaymoulin@gmail.com> <https://twitter.com/MoulinJay>"
 
