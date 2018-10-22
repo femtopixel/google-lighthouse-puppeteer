@@ -28,11 +28,7 @@ publish-npm: install-npm
 build-docker:
 	$(foreach arch,$(archs), \
 		cat Dockerfile | sed -E "s/FROM femtopixel\/google-lighthouse:(.+)/FROM femtopixel\/google-lighthouse:\1-$(arch)/g" > .build; \
-		if [ $(arch) = arm32v7 ]; then \
-			docker build -t femtopixel/google-lighthouse-puppeteer:${VERSION}-$(arch) --build-arg ARM=1 -f .build ${CACHE} .;\
-		else \
-			docker build -t femtopixel/google-lighthouse-puppeteer:${VERSION}-$(arch) --build-arg ARM=0 -f .build ${CACHE} .;\
-		fi;\
+		docker build -t femtopixel/google-lighthouse-puppeteer:${VERSION}-$(arch) --build-arg VERSION=${VERSION}-$(arch) -f .build ${CACHE} .;\
 	)
 publish-docker:
 	docker push femtopixel/google-lighthouse-puppeteer

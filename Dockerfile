@@ -1,6 +1,8 @@
 FROM femtopixel/google-lighthouse:v3.2.1
 
+ARG VERSION="v3.2.1-v1.9.0-0.3.4"
 LABEL maintainer="Jay MOULIN <jaymoulin@gmail.com> <https://twitter.com/MoulinJay>"
+LABEL version="${VERSION}"
 
 #https://github.com/GoogleChrome/puppeteer/blob/master/docs/troubleshooting.md
 USER root
