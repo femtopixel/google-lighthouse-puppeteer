@@ -1,6 +1,6 @@
-VERSION ?= 4.0.0-alpha.0-v1.10.0-0.3.4
+VERSION ?= v4.0.0-alpha.2-3.2.1
 CACHE ?= --no-cache=1
-FULLVERSION ?= 4.0.0-alpha.0-v1.10.0-0.3.4
+FULLVERSION ?= v4.0.0-alpha.2-3.2.1
 archs ?= amd64 i386 arm32v7
 .PHONY: install install-npm publish-npm docker build-docker publish-docker latest version
 all: install publish docker
