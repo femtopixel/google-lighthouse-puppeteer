@@ -1,9 +1,8 @@
 VERSION ?= 0.4.0
 CACHE ?= --no-cache=1
 FULLVERSION ?= 0.4.0
-.PHONY: install install-npm publish-npm docker build-docker publish-docker latest version
+.PHONY: install install-npm publish publish-npm
 all: install publish
-	CACHE= make latest
 install:
 	docker run --rm -v `pwd`:/app -ti -w /app node make install-npm
 publish:
