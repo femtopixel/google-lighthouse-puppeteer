@@ -5,17 +5,17 @@ const optionDefinitions = [
     {
         name: 'file',
         alias: 'f',
-        typeLabel: '[underline]{FILE}',
-        description: 'Path to your testcase [underline]{REQUIRED} (default option)' +
-        '\n([italic]{example}: /home/chrome/testcases/mytestcase.js)',
+        typeLabel: '{underline FILE}',
+        description: 'Path to your testcase {underline REQUIRED} (default option)' +
+        '\n({italic example}: /home/chrome/testcases/mytestcase.js)',
         defaultOption: true,
         group: 'main',
     },
     {
         name: 'port',
         alias: 'p',
-        typeLabel: '[underline]{PORT}',
-        description: 'Chrome headless debug port ([italic]{default}: 9222)',
+        typeLabel: '{underline PORT}',
+        description: 'Chrome headless debug port ({italic default}: 9222)',
         defaultValue: 9222,
         type: Number,
         group: 'main',
@@ -23,9 +23,9 @@ const optionDefinitions = [
     {
         name: 'output_directory',
         alias: 'd',
-        typeLabel: '[underline]{FOLDER}',
+        typeLabel: '{underline FOLDER}',
         description: 'Path to output reports' +
-        '\n([italic]{default}: /home/chrome/reports)',
+        '\n({italic default}: /home/chrome/reports)',
         defaultValue: '/home/chrome/reports',
         group: 'lighthouse'
     },
@@ -41,7 +41,7 @@ const optionDefinitions = [
         alias: 'l',
         description: 'Optional parameters to pass to lighthouse' +
         '\n(https://github.com/GoogleChrome/lighthouse/#cli-options)' +
-        '\n([italic]{example}: "--quiet --perf")',
+        '\n({italic example}: "--quiet --perf")',
         group: 'lighthouse'
     },
     {
@@ -73,9 +73,9 @@ const definition = [
     },
     {
         header: "Puppeteer",
-        content: 'You can add your options for puppeteer by prefixing them with [bold]{--puppeteer-}' +
+        content: 'You can add your options for puppeteer by prefixing them with {bold --puppeteer-}' +
         '\n(https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md#puppeteerlaunchoptions)' +
-        '\n\n[italic]{example}: "--puppeteer-ignoreHTTPSErrors --puppeteer-slowMo"'
+        '\n\n{italic example}: "--puppeteer-ignoreHTTPSErrors --puppeteer-slowMo"'
     }
 ];
 const usage = clu(definition);

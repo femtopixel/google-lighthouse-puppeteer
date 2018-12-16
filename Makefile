@@ -1,6 +1,6 @@
-VERSION ?= 0.4.0
+VERSION ?= 0.4.1
 CACHE ?= --no-cache=1
-FULLVERSION ?= 0.4.0
+FULLVERSION ?= ${VERSION}
 .PHONY: install install-npm publish publish-npm
 all: install publish
 install:
