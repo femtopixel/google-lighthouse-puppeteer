@@ -10,7 +10,7 @@ information within 7 days, we cannot debug your issue and will close it. We
 will, however, reopen it if you later provide the information.
 
 For more information about reporting issues, see
-https://github.com/femtopixel/docker-google-lighthouse-puppeteer/blob/master/CONTRIBUTING.md
+https://github.com/femtopixel/google-lighthouse-puppeteer/blob/master/CONTRIBUTING.md
 
 You do NOT have to include this information if this is a FEATURE REQUEST
 
@@ -24,7 +24,9 @@ People showing interest attract more attention ;)
 Briefly describe the problem you are having in a few paragraphs.
 -->
 
-**Command line I used to start the container**
+**Version of google-lighthouse-puppeteer (yarn list global google-lighthouse-puppeteer) or (npm list global google-lighthouse-puppeteer)**
+
+**Command line I used**
 
 **Steps to reproduce the issue:**
 1.
@@ -39,7 +41,7 @@ Briefly describe the problem you are having in a few paragraphs.
 
 **Additional information you deem important (e.g. issue happens only occasionally):**
 
-**Provide some logs (`docker logs perf`)**
+**Provide some logs**
 
 <details>
 <pre>
@@ -47,8 +49,3 @@ Briefly describe the problem you are having in a few paragraphs.
 </pre>
 </details>
 
-**Output of `docker inspect perf --format='{{index .Config.Labels.version}}'`:**
-
-```
-(paste your output here)
-```
