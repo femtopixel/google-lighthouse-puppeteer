@@ -53,7 +53,7 @@ Puppeteer
   You can add your options for puppeteer by prefixing them with --puppeteer-
   (https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md#puppeteerlaunchoptions)
 
-  example: "--puppeteer-ignoreHTTPSErrors --puppeteer-slowMo 20"
+  example: "--puppeteer-ignoreHTTPSErrors --puppeteer-slowMo 20"  
 ```
 
 ### Package Usage
@@ -83,10 +83,14 @@ You can change some options like in CLI :
     "_unknown": [
         "--puppeteer-ignoreHTTPSErrors",
         "--puppeteer-slowMo",
-        "20"
+        "20",
+        {"args": ["--no-sandbox", "--disable-setuid-sandbox"]}
     ]
 }
 ```
+
+If you need run puppeteer in a docker container or if you have already a chrome/chromium installed in your OS, you can 
+add the environment `CHROME_PATH` with the location.
 
 For puppeteer, all params must be added in the `_unknown` entry and are prefixed with `--puppeteer-`. Each value must be in separated entry.
 
@@ -137,3 +141,38 @@ class whateverYouWant
 
 module.exports = new whateverYouWant();
 ``` 
+
+### Docker
+This are the instructions to run puppeteer inside a docker container as root. This is not recommended, but is very handy
+for short lived docker containers.
+
+This example is built using pm2/alpine
+
+```dockerfile
+FROM keymetrics/pm2:latest-alpine
+LABEL maintainer="Your amazing name"
+
+# Install dependencies for native builds
+# This is in one giant command to keep the image size small
+RUN apk update && apk upgrade && \
+    echo @edge http://nl.alpinelinux.org/alpine/edge/community >> /etc/apk/repositories && \
+    echo @edge http://nl.alpinelinux.org/alpine/edge/main >> /etc/apk/repositories && \
+    apk add --no-cache \
+      chromium@edge \
+      harfbuzz@edge \
+      nss@edge \
+      git
+
+# This environment is used by puppeteer to know where is the browser installed in the container
+ENV CHROME_PATH=/usr/bin/chromium-browser
+# This environment tells puppeteer and npm to do not install the browser in node_modules
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
+
+COPY . /your-amazing-app/
+WORKDIR your-amazing-app
+RUN npm install
+
+EXPOSE 3000
+
+CMD ["pm2-runtime", "start", "pm2.json"]
+```
