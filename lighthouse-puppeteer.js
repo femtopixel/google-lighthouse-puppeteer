@@ -21,11 +21,18 @@ class LighthousePuppeteer {
 
     definePuppeteerOptions(opts = []) {
         for (let name in opts) {
-            if (opts[name].startsWith('--puppeteer-')) {
+            if (typeof opts[name] !== 'object' && opts[name].startsWith('--puppeteer-')) {
                 const param = opts[name].replace('--puppeteer-', '');
                 const nextParam = opts[name - -1];
-                this.options.puppeteer[param] = nextParam && !nextParam.startsWith('--puppeteer-') ? nextParam : true;
+                this.options.puppeteer[param] = nextParam && typeof nextParam !== 'object' && !nextParam.startsWith('--puppeteer-') ? nextParam : true;
+            } else if(typeof opts[name] === 'object' && opts[name].args.length > 0){
+                this.options.puppeteer.args = opts[name].args;
             }
+        }
+        const CHROME_PATH = process.env.CHROME_PATH;
+        if (CHROME_PATH && CHROME_PATH.length > 0) {
+            console.debug('Chrome bin path configured throught environment variable: ', CHROME_PATH);
+            this.options.puppeteer.executablePath = CHROME_PATH;
         }
         return this;
     }
@@ -61,38 +68,38 @@ class LighthousePuppeteer {
         return new Promise((resolveGlobal, reject) => {
             this.defineOptions(opts);
             const testcase = typeof (modulePath) === 'object' ? modulePath : require(modulePath);
-            if (typeof(testcase.connect) !== 'function') {
+            if (typeof (testcase.connect) !== 'function') {
                 console.log(`${modulePath}: Module incorrectly formatted. Module should have "connect" method!`);
                 process.exit(-3);
             }
-            if (typeof(testcase.getUrls) !== 'function') {
+            if (typeof (testcase.getUrls) !== 'function') {
                 console.log(`${modulePath}: Module incorrectly formatted. Module should have "getUrls" method!`);
                 process.exit(-4);
             }
             this.puppeteer.launch(this.options.puppeteer)
-                .then(testcase.connect)
-                .then(b => new Promise((resolve) => {
-                    this.browser = b;
-                    resolve(b);
-                }))
-                .then(b => new Promise((resolve) => {
-                    const lighthouseOptions = {
-                        verbose: this.options.lighthouse.verbose,
-                        sites: testcase.getUrls(),
-                        html: this.options.lighthouse.html,
-                        out: this.options.lighthouse.out,
-                        useGlobal: true,
-                        params: `--port ${this.options.debugPort} ${this.options.lighthouse.params}`,
-                    };
-                    this.lightHouseBatch(lighthouseOptions);
-                    resolve(b);
-                }))
-                .then(b => b.close())
-                .then(b => resolveGlobal)
-                .catch((err) => {
-                    this.browser && this.browser.close();
-                    reject(err);
-                });
+              .then(testcase.connect)
+              .then(b => new Promise((resolve) => {
+                  this.browser = b;
+                  resolve(b);
+              }))
+              .then(b => new Promise((resolve) => {
+                  const lighthouseOptions = {
+                      verbose: this.options.lighthouse.verbose,
+                      sites: testcase.getUrls(),
+                      html: this.options.lighthouse.html,
+                      out: this.options.lighthouse.out,
+                      useGlobal: true,
+                      params: `--port ${this.options.debugPort} ${this.options.lighthouse.params}`,
+                  };
+                  this.lightHouseBatch(lighthouseOptions);
+                  resolve(b);
+              }))
+              .then(b => b.close())
+              .then(b => resolveGlobal)
+              .catch((err) => {
+                  this.browser && this.browser.close();
+                  reject(err);
+              });
         });
     }
 }
