@@ -23,6 +23,7 @@
     "command-line-usage": "^5.0.3",
     "global": "^4.3.2",
     "lighthouse-batch": "^3.0.0",
+    "lighthouse": "^4.0.0",
     "puppeteer": "^1.11.0"
   },
   "author": "Jay MOULIN <jaymoulin@gmail.com> (https://jaymoulin.github.io)",
