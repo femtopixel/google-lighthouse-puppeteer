@@ -7,7 +7,7 @@ const optionDefinitions = [
         alias: 'f',
         typeLabel: '{underline FILE}',
         description: 'Path to your testcase {underline REQUIRED} (default option)' +
-        '\n({italic example}: /home/chrome/testcases/mytestcase.js)',
+            '\n({italic example}: /home/chrome/testcases/mytestcase.js)',
         defaultOption: true,
         group: 'main',
     },
@@ -25,7 +25,7 @@ const optionDefinitions = [
         alias: 'd',
         typeLabel: '{underline FOLDER}',
         description: 'Path to output reports' +
-        '\n({italic default}: /home/chrome/reports)',
+            '\n({italic default}: /home/chrome/reports)',
         defaultValue: '/home/chrome/reports',
         group: 'lighthouse'
     },
@@ -40,9 +40,17 @@ const optionDefinitions = [
         name: 'lighthouse_params',
         alias: 'l',
         description: 'Optional parameters to pass to lighthouse' +
-        '\n(https://github.com/GoogleChrome/lighthouse/#cli-options)' +
-        '\n({italic example}: "--quiet --perf")',
+            '\n(https://github.com/GoogleChrome/lighthouse/#cli-options)' +
+            '\n({italic example}: "--quiet --perf")',
         group: 'lighthouse'
+    },
+    {
+        name: 'chromium_params',
+        alias: 'c',
+        description: 'Optional parameters to pass to chrome/chromium browser' +
+            '\n(https://peter.sh/experiments/chromium-command-line-switches/)' +
+            '\n({italic example}: "--no-sandbox --disable-setuid-sandbox --ssl-version-max=tls1.1")',
+        group: 'main'
     },
     {
         name: 'verbose',
@@ -74,13 +82,13 @@ const definition = [
     {
         header: "Puppeteer",
         content: 'You can add your options for puppeteer by prefixing them with {bold --puppeteer-}' +
-        '\n(https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md#puppeteerlaunchoptions)' +
-        '\n\n{italic example}: "--puppeteer-ignoreHTTPSErrors --puppeteer-slowMo"'
+            '\n(https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md#puppeteerlaunchoptions)' +
+            '\n\n{italic example}: "--puppeteer-ignoreHTTPSErrors --puppeteer-slowMo"'
     }
 ];
 const usage = clu(definition);
 const options = cla(optionDefinitions, {partial: true});
-if (options.main.help || typeof(options.main.file) === 'undefined' || !options.main.file.length) {
+if (options.main.help || typeof (options.main.file) === 'undefined' || !options.main.file.length) {
     console.log(usage);
     process.exit(-1);
 }

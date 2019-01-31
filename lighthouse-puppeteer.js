@@ -12,8 +12,8 @@ class LighthousePuppeteer {
                 verbose: false
             },
             puppeteer: {
-                args: []
-            }
+            },
+            chromium: '',
         };
         this.options = Object.assign({}, this.defaultOptions);
         this.browser = null;
@@ -43,6 +43,9 @@ class LighthousePuppeteer {
         if (opts.lighthouse && opts.lighthouse.lighthouse_params) {
             this.options.lighthouse.params = opts.lighthouse.lighthouse_params;
         }
+        if (opts.main && opts.main.chromium_params) {
+            this.options.chromium = opts.main.chromium_params;
+        }
         if (!opts.main.verbose) {
             this.options.lighthouse.params += '--quiet';
         }
@@ -50,10 +53,23 @@ class LighthousePuppeteer {
             this.options.lighthouse.verbose = true;
         }
         this.definePuppeteerOptions(opts._unknown || []);
-        if (typeof (this.options.puppeteer.args) === 'undefined') {
-            this.options.puppeteer.args = [];
+        if (typeof (this.options.chromium) === 'undefined') {
+            this.options.chromium = '';
         }
-        this.options.puppeteer.args.push(`--remote-debugging-port=${this.options.debugPort}`);
+
+        if (this.options.chromium.length > 0) {
+            this.options.chromium += ' ';
+        }
+        this.options.chromium += `--remote-debugging-port=${this.options.debugPort}`;
+
+        // https://github.com/GoogleChrome/puppeteer/blob/master/docs/troubleshooting.md#setting-up-chrome-linux-sandbox
+        this.options.puppeteer.args = this.options.chromium.split(' ');
+        const CHROME_PATH = process.env.CHROME_PATH;
+
+        if (CHROME_PATH && CHROME_PATH.length > 0) {
+            console.debug('Chrome bin path configured through environment variable: ', CHROME_PATH);
+            this.options.puppeteer.executablePath = CHROME_PATH;
+        }
         return this;
     }
 

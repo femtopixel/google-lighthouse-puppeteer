@@ -33,11 +33,14 @@ $> lighthouse-puppeteer -h
 
 Options
 
-  -f, --file FILE   Path to your testcase REQUIRED (default option)
-                    (example: /home/chrome/testcases/mytestcase.js)
-  -p, --port PORT   Chrome headless debug port (default: 9222)
-  -v, --verbose     The more you add, the more it show information
-  -h, --help        Print this usage guide.
+  -f, --file FILE         Path to your testcase REQUIRED (default option)
+                          (example: /home/chrome/testcases/mytestcase.js)
+  -p, --port PORT         Chrome headless debug port (default: 9222)
+  -c, --chromium_params   Optional parameters to pass to chrome/chromium browser
+                            (https://peter.sh/experiments/chromium-command-line-switches/)
+                            (example: "--no-sandbox --disable-setuid-sandbox --ssl-version-max=tls1.1")
+  -v, --verbose           The more you add, the more it show information
+  -h, --help              Print this usage guide.
 
 Lighthouse
 
@@ -54,6 +57,21 @@ Puppeteer
   (https://github.com/GoogleChrome/puppeteer/blob/master/docs/api.md#puppeteerlaunchoptions)
 
   example: "--puppeteer-ignoreHTTPSErrors --puppeteer-slowMo 20"
+```
+
+### Docker
+
+You can see https://github.com/femtopixel/docker-google-lighthouse-puppeteer or https://hub.docker.com/r/femtopixel/google-lighthouse-puppeteer for more informations.
+
+### Environment
+
+If you want to use your own Chrome/Chromium instead of the provided by Puppeteer, you can add the following two environment variables:
+
+```bash
+# This environment is used by puppeteer to know where your chrome browser installed in located
+CHROME_PATH=/usr/bin/chromium-browser
+# This environment tells puppeteer and npm to not install the browser in node_modules
+PUPPETEER_SKIP_CHROMIUM_DOWNLOAD=true
 ```
 
 ### Package Usage
@@ -80,6 +98,7 @@ You can change some options like in CLI :
         "output_directory":"/home/chrome/reports",
         "lighthouse_params":""
     },
+    "chromium": "--no-sandbox --disable-setuid-sandbox --ssl-version-max=tls1.1",
     "_unknown": [
         "--puppeteer-ignoreHTTPSErrors",
         "--puppeteer-slowMo",
