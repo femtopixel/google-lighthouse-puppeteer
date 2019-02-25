@@ -104,7 +104,7 @@ class LighthousePuppeteer {
                     resolve(b);
                 }))
                 .then(b => b.close())
-                .then(b => resolveGlobal)
+                .then(resolveGlobal)
                 .catch((err) => {
                     this.browser && this.browser.close();
                     reject(err);
