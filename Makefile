@@ -1,8 +1,11 @@
+NPM ?= update
 VERSION ?= 1.0.0
 CACHE ?= --no-cache=1
 FULLVERSION ?= ${VERSION}
-.PHONY: install install-npm publish publish-npm
+.PHONY: install install-npm publish publish-npm npm
 all: install publish
+npm:
+	docker run --rm -v $$HOME:/root -v `pwd`:/app -ti -w /app node npm ${NPM}
 install:
 	docker run --rm -v `pwd`:/app -ti -w /app node make install-npm
 publish:
