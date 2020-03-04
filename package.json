@@ -26,7 +26,7 @@
     "lighthouse": "^5.1.0",
     "puppeteer": "^2.0.0"
   },
-  "author": "Jay MOULIN <jay@femtopixel.com> (https://femtopixel.com)",
+  "author": "Jay MOULIN <jay@femtopixel.com> (https://jaymoulin.me)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/femtopixel/google-lighthouse-puppeteer/issues"
