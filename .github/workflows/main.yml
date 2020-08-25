@@ -1,0 +1,23 @@
+name: CI
+
+on:
+  push:
+    tags:
+      - '*'
+
+jobs:
+  build:
+
+    runs-on: ubuntu-16.04
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: Installing dependencies
+        run: |
+          sudo apt update && sudo apt install make npm -y
+          sudo npm install npm-cli-login --global
+          npm-cli-login -u "${{ secrets.NPM_LOGIN }}" -p "${{ secrets.NPM_PASSWORD }}" -e "${{ secrets.NPM_EMAIL }}"
+      - name: Build binary
+        run: make install-npm
+      - name: Publish binary
+        run: npm publish
