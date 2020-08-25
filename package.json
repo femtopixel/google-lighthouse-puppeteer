@@ -1,6 +1,6 @@
 {
   "name": "google-lighthouse-puppeteer",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Google Lighthouse Puppeteer is a package to generate reports on multiple urls that allows or not authentication",
   "main": "lighthouse-puppeteer.js",
   "scripts": {
@@ -22,8 +22,8 @@
     "command-line-args": "^5.0.1",
     "command-line-usage": "^6.0.2",
     "global": "^4.3.2",
+    "lighthouse": "^6.2.0",
     "lighthouse-batch": "^6.0.0",
-    "lighthouse": "^6.1.1",
     "puppeteer": "^5.2.0"
   },
   "author": "Jay MOULIN <jay@femtopixel.com> (https://jaymoulin.me)",
