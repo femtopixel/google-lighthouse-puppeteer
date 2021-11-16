@@ -55,7 +55,8 @@ const optionDefinitions = [
     {
         name: 'verbose',
         alias: 'v',
-        description: 'Providing this option once will show more info from Lighthouse. Providing it twice will additionally provide info from `lighthouse-batch`.',
+        description: 'Providing this option once will show more info from Lighthouse.' +
+                     '\nProviding it twice will additionally provide info from `lighthouse-batch`.',
         type: Boolean,
         multiple: true,
         group: 'main',
