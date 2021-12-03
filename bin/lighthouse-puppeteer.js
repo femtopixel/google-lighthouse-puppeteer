@@ -41,7 +41,7 @@ const optionDefinitions = [
         alias: 'l',
         description: 'Optional parameters to pass to lighthouse' +
             '\n(https://github.com/GoogleChrome/lighthouse/#cli-options)' +
-            '\n({italic example}: "--quiet --perf")',
+            '\n({italic example}: "- --quiet --perf")',
         group: 'lighthouse'
     },
     {
@@ -49,7 +49,7 @@ const optionDefinitions = [
         alias: 'c',
         description: 'Optional parameters to pass to chrome/chromium browser' +
             '\n(https://peter.sh/experiments/chromium-command-line-switches/)' +
-            '\n({italic example}: "--no-sandbox --disable-setuid-sandbox --ssl-version-max=tls1.1")',
+            '\n({italic example}: "- --no-sandbox --disable-setuid-sandbox --ssl-version-max=tls1.1")',
         group: 'main'
     },
     {
