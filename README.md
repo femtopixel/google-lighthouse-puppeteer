@@ -43,7 +43,8 @@ Options
   -c, --chromium_params   Optional parameters to pass to chrome/chromium browser
                             (https://peter.sh/experiments/chromium-command-line-switches/)
                             (example: "- --no-sandbox --disable-setuid-sandbox --ssl-version-max=tls1.1")
-  -v, --verbose           The more you add, the more it show information
+  -v, --verbose           Providing this option once will show more info from Lighthouse.
+                            Providing it twice will additionally provide info from `lighthouse-batch`.
   -h, --help              Print this usage guide.
 
 Lighthouse
