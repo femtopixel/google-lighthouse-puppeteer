@@ -15,9 +15,10 @@ jobs:
       - name: Installing dependencies
         run: |
           sudo apt update && sudo apt install make npm -y
-          sudo npm install npm-cli-login --global
-          npm-cli-login -u "${{ secrets.NPM_LOGIN }}" -p "${{ secrets.NPM_PASSWORD }}" -e "${{ secrets.NPM_EMAIL }}"
+          sudo npm install --global
       - name: Build binary
         run: make install-npm
       - name: Publish binary
-        run: npm publish
+        run: |
+          echo '//registry.npmjs.org/:_authToken=${{ secrets.NPM_TOKEN  }}' > ${{ github.workspace }}/.npmrc
+          npm publish
