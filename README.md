@@ -1,3 +1,9 @@
+> [!CAUTION]
+> As-of 2021, this product does not have a free support team anymore. If you want this product to be maintained, please support my work.
+ 
+> [!NOTE]
+> (This product is available under a free and permissive license, but needs financial support to sustain its continued improvements. In addition to maintenance and stability there are many  desirable features yet to be added.)
+ 
 ![logo](logo.png)
 
 Lighthouse Puppeteer - NPM Package
@@ -8,10 +14,6 @@ Lighthouse Puppeteer - NPM Package
 [![PayPal donation](https://github.com/jaymoulin/jaymoulin.github.io/raw/master/ppl.png "PayPal donation")](https://www.paypal.me/jaymoulin)
 [![Buy me a coffee](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png "Buy me a coffee")](https://www.buymeacoffee.com/jaymoulin)
 [![Buy me a coffee](https://ko-fi.com/img/githubbutton_sm.svg "Buy me a coffee")](https://www.ko-fi.com/jaymoulin)
-
-DISCLAIMER: As-of 2021, this product does not have a free support team anymore. If you want this product to be maintained, please support.
-
-(This product is available under a free and permissive license, but needs financial support to sustain its continued improvements. In addition to maintenance and stability there are many desirable features yet to be added.)
 
 * [Google Chrome Headless](https://developers.google.com/web/updates/2017/04/headless-chrome) is the Google Chrome browser that can be started without graphical interface to accomplish several tasks (PDF printing, performance, automation...)
 * [Google Lighthouse](https://developers.google.com/web/tools/lighthouse/) analyzes web apps and web pages, collecting modern performance metrics and insights on developer best practices.

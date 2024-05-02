@@ -1,5 +1,5 @@
 NPM ?= update
-VERSION ?= 1.3.1
+VERSION ?= 1.4.0
 CACHE ?= --no-cache=1
 FULLVERSION ?= ${VERSION}
 .PHONY: install install-npm publish publish-npm npm all major minor patch clean
