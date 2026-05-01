@@ -16,7 +16,7 @@
     "puppeteer"
   ],
   "bin": {
-    "lighthouse-puppeteer": "./bin/lighthouse-puppeteer.js"
+    "lighthouse-puppeteer": "bin/lighthouse-puppeteer.js"
   },
   "dependencies": {
     "command-line-args": "^6.0.1",
